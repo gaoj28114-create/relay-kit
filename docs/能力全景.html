@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>接力包 · 能力全景与思维导图</title>
+<style>
+  :root{
+    --ink:#0f172a; --muted:#64748b; --line:#e2e8f0; --bg:#f8fafc; --card:#ffffff;
+    --c1:#0e7490; --c2:#b45309; --c3:#1e40af; --c4:#9d174d; --c5:#15803d; --c6:#4d7c0f;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-size:15px;line-height:1.7;}
+  .wrap{max-width:1180px;margin:0 auto;padding:32px 20px 48px}
+
+  header{text-align:center;margin-bottom:34px}
+  h1{margin:0 0 8px;font-size:31px;letter-spacing:.5px}
+  .sub{margin:0;color:var(--muted);font-size:16px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
+  .chips span{background:#eef2f7;color:#334155;border:1px solid var(--line);
+    border-radius:999px;padding:4px 13px;font-size:14px}
+  .chips span.ok{background:#e8f5ee;color:#166534;border-color:#c6e6d4}
+
+  /* ---- 思维导图 ---- */
+  .map{margin-top:6px}
+  .root{width:230px;margin:0 auto;text-align:center;background:var(--ink);color:#fff;
+    border-radius:14px;padding:14px 16px;box-shadow:0 6px 18px rgba(15,23,42,.16)}
+  .root b{display:block;font-size:20px;letter-spacing:1px}
+  .root i{display:block;font-style:normal;font-size:13px;opacity:.72;margin-top:3px}
+  .trunk{width:2px;height:26px;background:#cbd5e1;margin:0 auto}
+  .rail{height:2px;background:#cbd5e1;margin:0 16px}
+
+  .branches{display:flex;flex-wrap:wrap;gap:18px;margin-top:0}
+  .branch{flex:1 1 300px;min-width:0;background:var(--card);border:1px solid var(--line);
+    border-radius:12px;padding:15px 17px 13px;position:relative;box-shadow:0 1px 3px rgba(15,23,42,.05)}
+  .branch::before{content:"";position:absolute;top:-18px;left:50%;transform:translateX(-50%);
+    width:2px;height:18px;background:#cbd5e1}
+  .branch h2{margin:0 0 9px;font-size:16.5px;display:flex;align-items:center;gap:8px}
+  .dot{width:9px;height:9px;border-radius:50%;flex:0 0 auto}
+  .branch ul{margin:0;padding:0;list-style:none}
+  .branch li{position:relative;padding-left:15px;margin:5px 0;font-size:14.5px;color:#334155}
+  .branch li::before{content:"";position:absolute;left:0;top:.72em;width:6px;height:6px;
+    border-radius:50%;background:#cbd5e1}
+  .branch li b{color:var(--ink)}
+  .b1 h2{color:var(--c1)} .b1 .dot{background:var(--c1)}
+  .b2 h2{color:var(--c2)} .b2 .dot{background:var(--c2)}
+  .b3 h2{color:var(--c3)} .b3 .dot{background:var(--c3)}
+  .b4 h2{color:var(--c4)} .b4 .dot{background:var(--c4)}
+  .b5 h2{color:var(--c5)} .b5 .dot{background:var(--c5)}
+  .b6 h2{color:var(--c6)} .b6 .dot{background:var(--c6)}
+
+  /* ---- 命令速查 ---- */
+  h3.sec{margin:44px 0 14px;font-size:19px;padding-left:11px;border-left:4px solid var(--ink)}
+  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);
+    border-radius:10px;overflow:hidden}
+  th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);font-size:14.5px;
+    vertical-align:top}
+  th{background:#f1f5f9;font-weight:600;color:#334155;white-space:nowrap}
+  tr:last-child td{border-bottom:none}
+  td code{background:#eef2f7;border-radius:5px;padding:2px 7px;font-size:13.5px;color:#0f172a}
+  .star{color:#b45309;font-weight:700}
+  .code0{color:#15803d;font-weight:600}
+  .code2{color:#b91c1c;font-weight:600}
+
+  .limits{margin-top:26px;background:#fffdf5;border:1px solid #f0e2b8;border-radius:12px;
+    padding:15px 18px}
+  .limits h4{margin:0 0 8px;font-size:15.5px;color:#8a6d1f}
+  .limits ul{margin:0;padding-left:20px}
+  .limits li{font-size:14.5px;color:#5b4a1a;margin:3px 0}
+
+  footer{margin-top:34px;text-align:center;color:var(--muted);font-size:13.5px;line-height:1.9}
+  footer code{background:#eef2f7;border-radius:5px;padding:1px 6px}
+  @media (max-width:640px){
+    h1{font-size:25px}
+    .branch{flex:1 1 100%}
+    th,td{padding:9px 11px;font-size:14px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>接力包 · 能力全景</h1>
+    <p class="sub">一件事做一半，换个 AI 继续 —— <b>进度不丢</b>。零配置、零依赖、只写本地。</p>
+    <div class="chips">
+      <span>8 个文件 + 1 张能力图</span>
+      <span class="ok">仅 Python 标准库</span>
+      <span class="ok">0 处网络调用</span>
+      <span>状态在 ~/.relay</span>
+      <span>注入块 946 字符</span>
+    </div>
+  </header>
+
+  <section class="map">
+    <div class="root">
+      <b>接力包</b>
+      <i>Skill · 跨客户端任务接力</i>
+    </div>
+    <div class="trunk"></div>
+    <div class="rail"></div>
+
+    <div class="branches">
+
+      <article class="branch b1">
+        <h2><span class="dot"></span>① 入口：先问清需求</h2>
+        <ul>
+          <li>拆四要素：<b>交付物 / 领域 / 关键动作 / 验收标准</b></li>
+          <li>只问"不问就会做错方向"的项，<b>最多 3 条</b></li>
+          <li>能默认的给默认值 + "不接受就说不"</li>
+          <li>需求确认前：<b>不建卡、不选技能、不动手</b></li>
+          <li>例外：一句话的小事直接做</li>
+        </ul>
+      </article>
+
+      <article class="branch b2">
+        <h2><span class="dot"></span>② 接手：读状态，不追问</h2>
+        <ul>
+          <li>只有一条命令：<code>relay.py go</code></li>
+          <li>有在办任务 → <b>直接接着干</b></li>
+          <li>不再问已写进状态的目标 / 决策 / 边界</li>
+          <li>没任务 → 转 ① 入口流程</li>
+          <li>前提：各客户端在<b>同一台机器</b>、能读同一文件系统</li>
+        </ul>
+      </article>
+
+      <article class="branch b3">
+        <h2><span class="dot"></span>③ 路由：本地优先，四级降级</h2>
+        <ul>
+          <li>① <b>本地技能</b> — <code>cap_index.py search</code>（读索引，不逐个开 SKILL.md）</li>
+          <li>② <b>本地知识 / 已有脚本</b></li>
+          <li>③ <b>提示用户安装</b> — 结构化弹窗，同会话最多 1 次</li>
+          <li>④ <b>自写脚本</b> — 过 <code>audit</code> 三绿才放行</li>
+        </ul>
+      </article>
+
+      <article class="branch b4">
+        <h2><span class="dot"></span>④ 执行：定风格 + 压上下文</h2>
+        <ul>
+          <li>风格档：<b>严谨档 / 自适应档 / 参照档</b></li>
+          <li><code>style</code> — 从历史任务卡<b>现算</b>用户画像</li>
+          <li>上下文压缩 6 条：长内容落盘，对话只给路径 + 3 行</li>
+          <li>结论先行，不复述、不预告、不写总结段</li>
+          <li>能力检索只读索引，不重复读同一文件</li>
+        </ul>
+      </article>
+
+      <article class="branch b5">
+        <h2><span class="dot"></span>⑤ 交付：两道门都过</h2>
+        <ul>
+          <li><b>门 1 验证门</b>：真跑入口、回读产物；"文件存在且非空"不算验证</li>
+          <li><b>门 2 一致性门</b>：核对是否与既定决策、上次产物矛盾</li>
+          <li>发现冲突必须<b>显式问</b>，禁止静默改或两边都写</li>
+        </ul>
+      </article>
+
+      <article class="branch b6">
+        <h2><span class="dot"></span>⑥ 沉淀：习惯留在本地</h2>
+        <ul>
+          <li><code>profile set</code> — 只存<b>稳定、可跨任务复用</b>的偏好</li>
+          <li>只写本地文件，<b>绝不上传</b>任何云端或第三方接口</li>
+          <li>凭据、密钥、隐私内容一律不入画像</li>
+          <li>换电脑：把 <code>~/.relay</code> 拷过去即可</li>
+        </ul>
+      </article>
+
+    </div>
+  </section>
+
+  <h3 class="sec">命令速查（relay.py）</h3>
+  <table>
+    <thead>
+      <tr><th>命令</th><th>作用</th><th>关键点</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>go</code> <span class="star">★</span></td><td>单入口：看状态 / 建卡 / 初始化</td><td>日常只用这一条</td></tr>
+      <tr><td><code>init</code></td><td>首次使用，建状态目录</td><td>写 ~/.relay/tasks</td></tr>
+      <tr><td><code>doctor</code></td><td>自检：能不能用、缺什么、状态在哪</td><td>一眼看健康状态</td></tr>
+      <tr><td><code>new</code> / <code>set</code></td><td>建卡 / 更新目标、决策、待办、产物、阻塞</td><td><code>--decision</code> 是关键</td></tr>
+      <tr><td><code>list</code> / <code>show</code> / <code>resume</code></td><td>列出 / 全字段 / 输出续接包</td><td>resume 是接手第一条</td></tr>
+      <tr><td><code>done</code></td><td>收尾</td><td>可带 <code>--note</code></td></tr>
+      <tr><td><code>profile</code></td><td>用户画像 show / set / del</td><td>只写本地</td></tr>
+      <tr><td><code>style</code> <span class="star">★</span></td><td>从历史任务卡<b>现算</b>风格画像</td><td>不检索对话，任何客户端都能跑</td></tr>
+      <tr><td><code>audit</code> <span class="star">★</span></td><td>自写脚本 B1/B2/B3 检查点</td><td>填全 <span class="code0">退出码 0</span>；缺项 <span class="code2">退出码 2</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="limits">
+    <h4>不适用（先说清边界）</h4>
+    <ul>
+      <li>一次性小事（翻译一句、格式化一段）—— 直接做，建卡是负担</li>
+      <li>用户明确只要对话、不要流程 —— 按对话走</li>
+      <li><b>纯网页版 AI 读不到本地文件系统</b>，参与不了接力</li>
+      <li>它管<b>流程与状态</b>，不替你判断方案本身对不对</li>
+    </ul>
+  </div>
+
+  <footer>
+    <p>已知局限：注入块是<b>文字指令，不是系统钩子</b> —— 能提高"AI 主动读状态"的概率，<b>不保证 100%</b>。<br>
+    万一它没读，直接说一句 <code>先跑 relay.py go</code> 即恢复。</p>
+    <p>零依赖（Python 3.7+ 标准库）· 不联网 · 不发服务器 · 可卸载<br>
+    自查：<code>grep -rE "import (urllib|requests|socket|http)|subprocess" 接力包/</code> → 预期无输出</p>
+  </footer>
+
+</div>
+</body>
+</html>

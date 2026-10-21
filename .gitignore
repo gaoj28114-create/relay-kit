@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+config.local.json
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+.relay/
+.vscode/
+.idea/
